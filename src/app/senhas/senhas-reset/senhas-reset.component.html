@@ -1,0 +1,30 @@
+<div class="container" style="width: 50%;">
+    <div class="card" style="margin: 5px;">
+        <div class="card-header bg-primary text-white">
+            Resetar Senha
+        </div>
+        <div class="card-body">
+
+            <div class="row mb-3">
+                <div class="col-md">
+                    <app-alert [message]="alertMessage" [type]="alertType"></app-alert>
+                </div>
+            </div>
+
+            <form (ngSubmit)="onSubmit()" #resetSenhaForm="ngForm">
+
+                <div class="row mb-3">
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="email" required [(ngModel)]="usuarioEmail"
+                                name="email">
+                            <label for="email">E-mail</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="margin-right: 5px;">Enviar</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="container" style="width: 50%;">
+    <div class="card" style="margin: 5px;">
+        <div class="card-header bg-primary text-white">
+            Alterar Senha
+        </div>
+        <div class="card-body">
+
+            <div class="row mb-3">
+                <div class="col-md">
+                    <app-alert [message]="alertMessage" [type]="alertType"></app-alert>
+                </div>
+            </div>
+
+            <form (ngSubmit)="onSubmit()" #resetSenhaForm="ngForm">
+
+                <div class="row mb-3">
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="senhaAtual" required
+                                [(ngModel)]="senhasAlterarClass.senhaAtual" name="senhaAtual">
+                            <label for="senhaAtual">Senha Atual</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="senhaNova" required
+                                [(ngModel)]="senhasAlterarClass.senhaNova" name="senhaNova">
+                            <label for="senhaNova">Senha Nova</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="senhaNovaConfirmacao" required
+                                [(ngModel)]="senhasAlterarClass.senhaNovaConfirmacao" name="senhaNovaConfirmacao">
+                            <label for="senhaNovaConfirmacao">Senha Nova (Confirmação)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="margin-right: 5px;">Salvar</button>
+            </form>
+        </div>
+    </div>
+</div>
