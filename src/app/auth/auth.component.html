@@ -1,0 +1,45 @@
+<div class="container" style="width: 50%;">
+    <div class="card" style="margin: 5px;">
+        <div class="card-header bg-primary text-white">
+            Login
+        </div>
+        <div class="card-body">
+
+            <div class="row mb-3">
+                <div class="col-md">
+                    <app-alert [message]="alertMessage" [type]="alertType"></app-alert>
+                </div>
+            </div>
+
+            <form (ngSubmit)="onSubmit()" #authForm="ngForm">
+
+                <div class="row mb-3">
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="email" required [(ngModel)]="auth.email"
+                                name="email">
+                            <label for="email">E-mail</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="senha" required [(ngModel)]="auth.senha"
+                                name="senha">
+                            <label for="senha">Senha</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md">
+                        <a href="#" [routerLink]="['/senhas/reset']" routerLinkActive="router-link-active">Esqueçeu sua
+                            senha?</a>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="margin-right: 5px;">Entrar</button>
+            </form>
+        </div>
+    </div>
+</div>
