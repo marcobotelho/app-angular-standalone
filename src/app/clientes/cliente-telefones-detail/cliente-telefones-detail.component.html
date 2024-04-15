@@ -1,0 +1,47 @@
+<div class="card" style="margin: 5px;">
+    <div class="card-header bg-primary text-white">
+        {{ telefone.id === 0 ? 'Incluir Telefone' : 'Editar Telefone' }} - {{ cliente.nome }}
+    </div>
+    <div class="card-body">
+
+        <app-alert [message]="alertMessage" [type]="alertType"></app-alert>
+
+        <form (ngSubmit)="onSubmit()" #telefoneForm="ngForm">
+
+            <input type="hidden" [(ngModel)]="telefone.id" name="id">
+            <input type="hidden" [(ngModel)]="telefone.clienteId" name="clienteId">
+
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="numero" required [(ngModel)]="telefone.numero"
+                            name="numero" [mask]="'(00) 00000-0000'">
+                        <label for="numero">Número</label>
+                    </div>
+                </div>
+                <!-- <div class="col-md-4">
+                    <div class="form-floating">
+                        <select class="form-select" id="tipo" required [(ngModel)]="telefone.tipo" name="tipo">
+                            <option value="CELULAR">Celular</option>
+                            <option value="RESIDENCIAL">Residencial</option>
+                            <option value="COMERCIAL">Comercial</option>
+                        </select>
+                        <label for="tipo">Tipo</label>
+                    </div>
+                </div> -->
+                <div class="col-md-4">
+                    <div class="form-floating">
+                        <select class="form-select" id="tipo" required [(ngModel)]="telefone.tipo" name="tipo">
+                            <option *ngFor="let telefoneTipo of telefoneTipos" value="{{ telefoneTipo.value }}">{{
+                                telefoneTipo.title }}</option>
+                        </select>
+                        <label for="tipo">Tipo</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="margin-right: 5px;">Salvar</button>
+            <button type="button" class="btn btn-danger" (click)="goToCliente()">Cancelar</button>
+        </form>
+    </div>
+</div>

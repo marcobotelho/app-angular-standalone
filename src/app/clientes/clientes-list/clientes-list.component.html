@@ -1,0 +1,39 @@
+<div class="card" style="margin: 5px;">
+    <div class="card-header bg-primary text-white">
+        Lista Clientes
+    </div>
+    <div class="card-body">
+        <app-alert [message]="alertMessage" [type]="alertType"></app-alert>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Idade</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cliente of clientes">
+                    <th scope="row">{{ cliente.id }}</th>
+                    <td>{{ cliente.nome }}</td>
+                    <td>{{ cliente.email }}</td>
+                    <td>{{ cliente.idade }}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm" style="margin-right: 5px"
+                            (click)="goToEdit(cliente)">Editar</button>
+                        <button type="button" class="btn btn-danger btn-sm" style="margin-right: 5px"
+                            (click)="onDelete(cliente.id)">Excluir</button>
+                        <button type="button" class="btn btn-warning btn-sm"
+                            (click)="goToTelefones(cliente)">Telefones</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <button type="button" class="btn btn-success btn-sm" (click)="goToNew()">Novo</button>
+    </div>
+</div>

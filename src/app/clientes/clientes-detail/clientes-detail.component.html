@@ -1,0 +1,113 @@
+<div class="card" style="margin: 5px;">
+    <div class="card-header bg-primary text-white">
+        {{ cliente.id === 0 ? 'Incluir Cliente' : 'Editar Cliente' }}
+    </div>
+
+    <div class="card-body">
+        <app-alert [message]="alertMessage" [type]="alertType"></app-alert>
+
+        <form (ngSubmit)="onSubmit()" #clientForm="ngForm">
+
+            <input type="hidden" [(ngModel)]="cliente.id" name="id">
+
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="nome" required [(ngModel)]="cliente.nome"
+                            name="nome">
+                        <label for="nome">Nome</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="email" required [(ngModel)]="cliente.email"
+                            name="email">
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="idade" [(ngModel)]="cliente.idade" name="address">
+                        <label for="address">Idade</label>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-floating">
+                        <input type="date" class="form-control" id="dataNascimento" required
+                            [(ngModel)]="cliente.dataNascimento" name="dataNascimento">
+                        <label for="dataNascimento">Nascimento</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-1">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="cep" required [(ngModel)]="cliente.cep" name="cep"
+                            [mask]="'00000-000'" (blur)="onCepBlur()">
+                        <label for="cep">CEP</label>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="endereco" [(ngModel)]="cliente.endereco"
+                            name="endereco">
+                        <label for="endereco">Endereço</label>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="bairro" required [(ngModel)]="cliente.bairro"
+                            name="bairro">
+                        <label for="bairro">Bairro</label>
+                    </div>
+                </div>
+
+                <!-- <div class="col-md-1">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="estado" [(ngModel)]="cliente.estado" name="estado">
+                        <label for="estado">Estado</label>
+                    </div>
+                </div> -->
+
+                <div class="col-md-1">
+                    <div class="form-floating">
+                        <select class="form-select" id="estado" required [(ngModel)]="cliente.municipio.estado.id"
+                            name="estado" (change)="onChangeEstados($event)">
+                            <option value=""></option>
+                            <option *ngFor="let estado of estados" [value]="estado.id">{{ estado.sigla }}</option>
+                        </select>
+                        <label for="estado">Estado</label>
+                    </div>
+                </div>
+
+                <!-- <div class="col-md-2">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="municipio" required [(ngModel)]="cliente.municipio"
+                            name="municipio">
+                        <label for="municipio">Municipio</label>
+                    </div>
+                </div> -->
+
+                <div class="col-md-3">
+                    <div class="form-floating">
+                        <select class="form-select" id="municipio" required [(ngModel)]="cliente.municipio.id"
+                            name="municipio">
+                            <option value=""></option>
+                            <option *ngFor="let municipio of municipios" [value]="municipio.id">{{ municipio.nome }}
+                            </option>
+                        </select>
+                        <label for="estado">Municipio</label>
+                    </div>
+                </div>
+
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-right: 5px;">Salvar</button>
+            <button type="button" class="btn btn-danger" (click)="onCancel()">Cancelar</button>
+        </form>
+    </div>
+</div>
