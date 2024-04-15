@@ -1,0 +1,34 @@
+<div class="card" style="margin: 5px;">
+    <div class="card-header bg-primary text-white">
+        {{ perfil.id === 0 ? 'Incluir Perfil' : 'Editar Perfil' }}
+    </div>
+    <div class="card-body">
+
+        <app-alert [message]="alertMessage" [type]="alertType"></app-alert>
+
+        <form (ngSubmit)="onSubmit()" #perfilForm="ngForm">
+
+            <input type="hidden" [(ngModel)]="perfil.id" name="id">
+
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="nome" required [(ngModel)]="perfil.nome"
+                            name="nome">
+                        <label for="nome">Nome</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="descricao" required [(ngModel)]="perfil.descricao"
+                            name="descricao">
+                        <label for="descricao">Descrição</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="margin-right: 5px;">Salvar</button>
+            <button type="button" class="btn btn-danger" (click)="goToPerfis()">Cancelar</button>
+        </form>
+    </div>
+</div>

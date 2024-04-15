@@ -1,0 +1,33 @@
+<div class="card" style="margin: 5px;">
+    <div class="card-header bg-primary text-white">
+        Perfil {{ perfil.descricao }} - Lista Usuarios
+    </div>
+    <div class="card-body">
+        <app-alert [message]="alertMessage" [type]="alertType"></app-alert>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">E-mail</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of usuariosChecked">
+                    <th scope="col" width="5%"><input class="form-check-input" type="checkbox"
+                            [ngModel]="usuario.checked" (click)="onCheck(usuario)"></th>
+                    <th scope="row">{{ usuario.id }}</th>
+                    <td>{{ usuario.nome }}</td>
+                    <td>{{ usuario.email }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <button type="button" class="btn btn-primary btn-sm" (click)="goToPerfis()"
+            style="margin-right: 5px">Voltar</button>
+        <button type="button" class="btn btn-success btn-sm" (click)="onSave()">Salvar</button>
+    </div>
+</div>
