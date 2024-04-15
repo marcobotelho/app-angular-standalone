@@ -1,0 +1,37 @@
+<div class="card" style="margin: 5px;">
+    <div class="card-header bg-primary text-white">
+        Lista Usuarios
+    </div>
+    <div class="card-body">
+        <app-alert [message]="alertMessage" [type]="alertType"></app-alert>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of usuarios">
+                    <th scope="row">{{ usuario.id }}</th>
+                    <td>{{ usuario.nome }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm" style="margin-right: 5px"
+                            (click)="goToEdit(usuario)">Editar</button>
+                        <button type="button" class="btn btn-danger btn-sm" style="margin-right: 5px"
+                            (click)="onDelete(usuario.id)">Excluir</button>
+                        <button type="button" class="btn btn-warning btn-sm"
+                            (click)="goToPerfis(usuario)">Perfis</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <button type="button" class="btn btn-success btn-sm" (click)="goToNew()">Novo</button>
+    </div>
+</div>
