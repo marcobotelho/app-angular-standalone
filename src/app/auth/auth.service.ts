@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, retry, throwError } from 'rxjs';
+import { PerfilClass } from '../perfis/classes/perfil-class';
 import { AuthClass } from './auth-class';
 
 interface ResponseInterface {
@@ -41,6 +42,12 @@ export class AuthService {
         JSON.stringify(auth),
         this.httpOptions
       )
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  getUsuarioPerfisByEmail(usuarioEmail: string): Observable<PerfilClass[]> {
+    const url = `${this.baseUrl}/usuario-perfis/${usuarioEmail}`;
+    return this.http.get<PerfilClass[]>(url)
       .pipe(retry(1), catchError(this.handleError));
   }
 

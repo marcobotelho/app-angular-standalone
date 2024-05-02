@@ -4,7 +4,6 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Subscription, lastValueFrom } from 'rxjs';
 import { AlertComponent } from '../shared/alert/alert.component';
 import { AlertService } from '../shared/alert/alert.service';
-import { UsuariosService } from '../usuarios/services/usuarios.service';
 import { AuthClass } from './auth-class';
 import { AuthService } from './auth.service';
 
@@ -25,7 +24,7 @@ export class AuthComponent {
 
   private subscription: Subscription = new Subscription();
 
-  constructor(private authService: AuthService, private usuarioService: UsuariosService, private alertService: AlertService,
+  constructor(private authService: AuthService, private alertService: AlertService,
     private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
@@ -48,22 +47,22 @@ export class AuthComponent {
   private async getAuth() {
     try {
       const responseToken = await lastValueFrom(this.authService.postLogin(this.auth));
-      if (responseToken) {
+      const usuarioPerfis = await lastValueFrom(this.authService.getUsuarioPerfisByEmail(this.auth.email));
+      if (responseToken && usuarioPerfis) {
         const token = responseToken.message.split(' Token ')[1];
+        const roles: string[] = [];
+        for (const p of usuarioPerfis) {
+          roles.push(p.nome);
+        }
+
         this.authService.setUsuarioEmail(this.auth.email);
         this.authService.setToken(token);
+        this.authService.setRoles(roles);
 
-        const usuarioPerfis = await lastValueFrom(this.usuarioService.getUsuarioPerfisByEmail(this.auth.email));
-        if (usuarioPerfis) {
-          const roles: string[] = [];
-          for (const p of usuarioPerfis) {
-            roles.push(p.nome);
-          }
-          this.authService.setRoles(roles);
+        this.router.navigate(['home']);
 
-          this.router.navigate(['home']);
-        }
       }
+
     } catch (err) {
       const urlFragments = ['auth'];
       this.alertService.sendAlert(urlFragments, "<strong>Erro</strong><br>" + err, 'error');

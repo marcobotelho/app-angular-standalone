@@ -65,12 +65,6 @@ export class UsuariosService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
-  getUsuarioPerfisByEmail(usuarioEmail: string): Observable<PerfilClass[]> {
-    const url = `${this.baseUrl}/usuario-perfis/${usuarioEmail}`;
-    return this.http.get<PerfilClass[]>(url)
-      .pipe(retry(1), catchError(this.handleError));
-  }
-
   // updateUsuarioPerfis(usuarioId: number, perfis: PerfilClass[]) {
   //   console.log("perfis:", perfis);
   //   console.log("usuarioId:", usuarioId);
